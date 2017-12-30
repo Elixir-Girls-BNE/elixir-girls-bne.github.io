@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Always force latest IE rendering engine or request Chrome Frame -->
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>Elixir Girls Guides - Version Control (Git)</title>
+
+    <link href="/stylesheets/normalize.css" rel="stylesheet" /><link href="/stylesheets/all.css" rel="stylesheet" />
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Elixir Girls website">
+    <meta name="author" content="Cath Jones">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="Elixir Girls" />
+    <meta property="og:type" content="event" />
+    <meta property="og:url" content="http://elixirgirls.com" />
+    <meta property="og:image" content="http://elixirgirls.com/img/header.jpg" />
+    <meta property="og:description" content="Our aim is to make technology more approachable by creating a fun and friendly environment for people to come together and learn about Elixir, Phoenix and Functional Programming" />
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href="/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="/stylesheets/creative.css" rel="stylesheet">
+    <link href="/stylesheets/highlighting.css" rel="stylesheet" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="guides guides_version-control-git">
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top guide-nav-bar">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll" href="/#page-top">Elixir Girls</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="page-scroll" href="/#about">About</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="/#events">Events</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="/guides/">Guides</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="/#sponsors">Sponsors</a>
+                </li>
+                <li>
+                    <a class="page-scroll" href="/#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+<div id="wrapper">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Elixir Girls Guides</a>
+        </div>
+        <!-- /.navbar-header -->
+
+        <!-- /.navbar-top-links -->
+
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav">
+                <ul class="nav" id="side-menu nav">
+                    <li>
+                        <a id="dropdown-menu" href="#">Installation</a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="/install-guides/mac.html">Mac</a>
+                            </li>
+                            <li>
+                                <a href="/install-guides/windows.html">Windows</a>
+                            </li>
+                            <li>
+                                <a href="/install-guides/linux.html">Linux</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/install-guides/dev-tools.html">Additional Tools</a>
+                    </li>
+                    <li>
+                        <a href="/guides/elixir-beginners-guide.html">Beginner's Guide</a>
+                    </li>
+                    <li>
+                        <a href="/guides/slackir.html">Slackir App</a>
+                    </li>
+                    <li>
+                        <a href="/guides/channels.html">Channels</a>
+                    </li>
+                    <li>
+                        <a href="/guides/persistence.html">Persistence</a>
+                    </li>
+                    <li>
+                        <a href="/guides/blog-beginners-guide.html">Beginner's Blog Guide</a>
+                    </li>
+                    <li>
+                        <a href="/guides/version-control-git.html">Version Control (Git)</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+    </nav>
+
+    <div id="page-wrapper">
+        <h1>New Blog</h1>
+        <p>Welcome to Elixir Girls! This guide is for those of you with little or no experience of programming. Together we are going
+        to build a simple blog post (and we might even get to add a comments section too...stay tuned)</p>
+        <h2>Step 1</h2>
+        <p>The first thing we need to do is create a new project and it's best to put this in its own directory. Open your terminal (be sure to
+        as an instructor if unsure) and type the following</p>
+        <p><code>mkdir elixir-girls</code>
+        <p><code>cd elixir-girls</code></p>
+        <p><code>mix phoenix.new blog_elixir_girls</code></p>
+        <p>This command is how we generate a project using the phoenix framework. It will automatically create a lot of folders for you. This will help
+        us put our code in the <italic>correct</italic> place. Frameworks follow best practice based of years of other developers experience. If you take a look
+        at your terminal you will see lots of output from running that one command</p>
+        <p>While running the above command you might receive the following message</p>
+        <p><code>Fetch and install dependencies? [Yn] Y</code></p>
+        <p>If so simply type <code>Y</code></p>
+        <p>The output in your terminal will look something like below</p>
+        <img src="/images/phoenix_generate_output.png" alt="Phoenix generator output" width="80%" >
+        <p>Now that the project has started you should cd (stands for change directory) into the new <italic>blog_elixir_girls</italic> folder.
+        Simply type the command below</p>
+        <p><code>cd blog_elixir_girls</code></p>
+        <p>If at any stage you are unsure which directory you are in simply type the command below</p>
+        <p><code>pwd</code></p>
+        <p>This stands for <strong>p</strong>rint <strong>w</strong>orking <strong>d</strong>irectory and will always show you the full path of the directory (or folder) you are in </p>
+
+        <h2>Open Sublime</h2>
+        <p>Lets open sublime which you might remember is the text editor we installed earlier. Navigate to the directory/folder where you new project
+            is stored (remember the project is called <strong>blog_elixir_girls</strong>. Just ask a mentor if unsure)
+        </p>
+
+        <h2>Running the Server</h2>
+        <p>Even though we haven't done much (well in fact we have only typed in one command its a good time to see if we can run our server. From
+        inside your blog_elixir_girls directory type the following command (give it a few mins as it has a bit of work to do).
+        Don't worry if you see some nasty looking errors in red..its just looking for a database and we are about to do that!</p>
+        <p><code>mix phoenix.server</code></p>
+
+        <p>Now open a browser window and enter the following url</p>
+        <p><code>http://localhost:4000</code></p>
+        <p>You should see the Phoenix Framework Welcome Page as below</p>
+        <img src="/images/phoenix_welcome.png" alt="Phoenix welcome" width="80%" >
+        <p>To terminate the server type ctl-c twice. You should now be back in your terminal window ready to type in more commands </p>
+
+        <h2>Step 2</h2>
+        <p>Lets use one of the built in Phoenix generators to create our MVC architecture. FYI Phoenix comes with 4 kinds of generators more on this
+        later :) For now simply type the command below into the terminal</p>
+        <p><code>mix phoenix.gen.html Post posts title:string body:text</code></p>
+        <p>The Phoenix generator has just created a model, view, controller (aswell as some tests and a database connection). We must declare the resource
+        (that's the <strong>Post</strong> bit in singular and plural for this command to work. We must also specify the type of fields we will need our
+        resource to have. In this case we need a title which is of type <strong>String</strong> and body which is of type <strong>text</strong>. String and Text
+        are very similar but text can allow for more data to be input than string. The output will look similar to below</p>
+        <img src="/images/phoenix_scaffold.png" alt="Phoenix scaffold" width="80%" >
+        <p>Next you need to simply follow the commands that your terminal window has informed you of. Its really good practice to watch our terminal window
+        for hints about next actions and any issues. Open sublime and navigate to the folder web->router.ex and enter the Post route under scope "/".
+        When done it should look similar to below. Leave the rest of the file as is. Remember to save!</p>
+        <p><code>scope "/", BlogElixirGirls do</code></p>
+        <p><code>pipe_through :browser # Use the default browser stack</code></p>
+        <p><code>   resources "/posts", PostController</code></p>
+        <p><code>   get "/", PageController, :index</code></p>
+        <p><code>   end</code></p>
+        <p>Return to your terminal window and type in the command below</p>
+        <p><code>mix ecto.create</code></p>
+        <p>and</p>
+        <p><code>mix ecto.migrate</code></p>
+        <p>Now we can start our Phoenix Server again (<code>mix phoenix.server</code>). Open a browser window and enter the follow url
+            <code><code>mix phoenix.server</code></code>. You should be able to enter a new Post and see a list. Have a play, take some time and
+        remember to keep an eye on the Phoenix Service console (that's running in your terminal window) to see what's going on behind the scenes.
+        </p>
+        <p>Congrats on the work you've done so far! Next lets add some comments to our blog posts :) </p>
+
+
+
+    </div>
+    <!-- /#page-wrapper -->
+</div>
+<!-- /#wrapper -->
+
+</body>
+
+<!-- jQuery -->
+<script src="/vendor/jquery/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+<script src="/vendor/scrollreveal/scrollreveal.min.js"></script>
+<script src="/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+<!-- Theme JavaScript -->
+<script src="/javascripts/creative.js"></script>
+<script src="/javascripts/all.js"></script>
+
+</html>
