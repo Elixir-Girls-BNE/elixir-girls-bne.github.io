@@ -212,6 +212,37 @@
         remember to keep an eye on the Phoenix Service console (that's running in your terminal window) to see what's going on behind the scenes.
         </p>
         <p>Congrats on the work you've done so far! Next lets add some comments to our blog posts :) </p>
+        <h2>Adding Comments</h2>
+        <p>Its time to be able to comment on each blog post. Ensure you are in the terminal window and the Phoenix server is <strong>not</strong> running. Remember
+        to stop the server press ctrl-c twice. Type the following command to generate a new comments model</p>
+        <p><code>mix phoenix.gen.model Comment comments name:string content:text post_id:references:posts</code></p>
+        <p>By using <code>references</code> above the Phoenix framework automatically creates the foreign key field for you and index it. Indexing helps to speed
+            up searching the database (you can think of it as being similar to a book index). A foreign key in this case is a column in the
+            comments table that uniquely identifies a post record in the Post table. </p>
+        <p>You should also notice the output of that command has generated new files for us to use. We now need to edit some of these files.
+        Lets start by adding the relationship between the Comments resource and the Posts resource to their corresponding models. In sublime navigate
+         to the following file Web -> Models -> comment.ex, open the file and add the following line.</p>
+        <p>The section of code should now resemble below</p>
+        <img src="/images/phoenix_belongs_to.png" alt="Phoenix models" width="80%" >
+        <p>We now need to create the other side of this relations inside our Post model. Naviate to and open the file Web -> Models ->
+            post.ex. Here we are telling our Post model that it can have many comments assocated to it. Don't forget to save the files. The
+        final code should resemble below</p>
+        <img src="/images/phoenix_has_many.png" alt="Phoenix models" width="70%" >
+        <p>Ensure all files are saved. We are now ready to run the new migration which is very similar to what we did in Step 2 above</p>
+        <p>From the command line run the following</p>
+        <p><code>mix ecto.migrate</code></p>
+        <p>Hopefully we should be on track with no issues (remember to call a mentor if you are stuck). Next we need to update our routes. Open the
+        router.ex file under the <b>Web</b> folder and add the following to the scope "/".  Update the file so it resembles below. All we are doing here is add a route for comments underneath
+            the posts route. This will become clearly shortly </p>
+
+        <img src="/images/routes.png" alt="Phoenix routes" width="70%" >
+        <p>Routes are a big topic in themselves but in a nutshell we have just made comment to be nested under posts. This really means we can't have
+        a comment without first having a post and also each comment belongs to (or is associated with) a post.</p>
+        <p>Lets go back to our terminal window and look at our routes. We can do this anytime in a project and its a good habit to get into. </p>
+        <p><code>mix phoenix.routes</code></p>
+        <img src="/images/phoenix_routes.png" alt="Phoenix routes" width="70%" >
+        <p>The route that has the red arrow is the one we are currently interested in. It tells us exactly what the url needs to be in order to create
+        a comment. Don't be confused. We have a lightening talk about routes coming up. Just go with it for now :) </p>
 
 
 
