@@ -198,11 +198,13 @@
         <p>Next you need to simply follow the commands that your terminal window has informed you of. Its really good practice to watch our terminal window
         for hints about next actions and any issues. Open sublime and navigate to the folder web->router.ex and enter the Post route under scope "/".
         When done it should look similar to below. Leave the rest of the file as is. Remember to save!</p>
-        <p><code>scope "/", BlogElixirGirls do</code></p>
-        <p><code>pipe_through :browser # Use the default browser stack</code></p>
-        <p><code>   resources "/posts", PostController</code></p>
-        <p><code>   get "/", PageController, :index</code></p>
-        <p><code>   end</code></p>
+        <pre><code>
+            scope "/", BlogElixirGirls do
+            pipe_through :browser # Use the default browser stack
+            resources "/posts", PostController
+            get "/", PageController, :index
+            end
+        </code></pre>
         <p>Return to your terminal window and type in the command below</p>
         <p><code>mix ecto.create</code></p>
         <p>and</p>
@@ -243,6 +245,34 @@
         <img src="/images/phoenix_routes.png" alt="Phoenix routes" width="70%" >
         <p>The route that has the red arrow is the one we are currently interested in. It tells us exactly what the url needs to be in order to create
         a comment. Don't be confused. We have a lightening talk about routes coming up. Just go with it for now :) </p>
+        <p>Before we move on it's a good time to create an alias for the Comment model. Elixir allows us to set up an alias for any module name.
+        In our project the module name is <code>BlogElixirGirls</code> and therefore the fully-qualified name for our Comment model is
+            BlogElixirGirls.Comment but we can shorten this name to just Comment by using an alias...so let's do that now</p>
+        <p>Navigate and open the post_controller.ex file inside the Web -> Controllers folder and add this line at the top, right underneath the
+        existing alias (alias BlogElixirGirls.Post)</p>
+
+        <p><code>alias BlogPhoenix.Comment, as: Comment</code></p>
+        <p>Now its time to add a function scrub_params. Basically this 'scrubs' the params from the request and
+            is useful for removing empty strings sent via HTML forms. Let's do that  now. Add the following line below the alias</p>
+        <p><code>plug :scrub_params, "comment" when action in [:add_comment]</code></p>
+        <p>The next step is to define the <strong>add_comment</strong> function</p>
+        <pre><code>def add_comment(conn, %{"comment" => comment_params, "post_id" => post_id}) do
+    changeset = Comment.changeset(%Comment{}, Map.put(comment_params, "post_id", post_id))
+    post = Post |> Repo.get(post_id) |> Repo.preload([:comments])
+
+    if changeset.valid? do
+      Repo.insert(changeset)
+
+      conn
+      |> put_flash(:info, "Comment added.")
+      |> redirect(to: post_path(conn, :show, post))
+    else
+      render(conn, "show.html", post: post, changeset: changeset)
+    end
+  end
+
+        </code></pre>
+
 
 
 
