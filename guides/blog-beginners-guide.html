@@ -272,6 +272,81 @@
   end
 
         </code></pre>
+      <p>The <code>Comment.changeset</code> function is defined in the model (web => models => comment.ex) and its purpose is to ensure
+      the data is in the correct format and valid before being saved to our comment table in the database</p>
+        <p>We next need to update show function inside the post_controller.ex file. Navigate to it (remember its under web => controllers).
+            Change the show function be reflect the changes below
+        </p>
+<pre><code>
+    def show(conn, %{"id" => id}) do
+      post = Repo.get(Post, id) |> Repo.preload([:comments])
+      changeset = Comment.changeset(%Comment{})
+      render(conn, "show.html", post: post, changeset: changeset)
+    end
+</code></pre>
+        <p>Here we are getting the post and all of its associated comments. The comment changeset is necessary to enable us to have the comments
+        form on the post view. So now we need to create the comment form. Create a new file called <code>comment_form.html.eex</code> in the
+        web => templates => post folder and input the following</p>
+        <pre><code>
+           <%= form_for @changeset, @action, fn f -> %>
+              <%= if f.errors != [] do %>
+                < div class="alert alert-danger">
+                  <p>Oops, something went wrong! Please check the errors below:</p>
+                  <ul>
+                    <%= for {attr, message} <- f.errors do %>
+                      <li><%= humanize(attr) %> <%= message %></li>
+                    <% end %>
+                  </ul>
+                < /div>
+              <% end %>
+
+              < div class="form-group">
+                <label>Name</label>
+                <%= text_input f, :name, class: "form-control" %>
+              < /div>
+
+              < div class="form-group">
+                <label>Content</label>
+                <%= textarea f, :content, class: "form-control" %>
+              < /div>
+
+              < div class="form-group">
+                <%= submit "Add comment", class: "btn btn-primary" %>
+              < /div>
+            <% end %>
+        </code></pre>
+        <p>In order to render the above template in the post show view we must update it. Navigate to web => templates => post => show.html.eex and
+        input the following line just above the link lines of code</p>
+        <pre><code><%= render "comment_form.html", post: @post, changeset: @changeset,
+action: post_post_path(@conn, :add_comment, @post) %>
+</code></pre>
+
+        <h2>Step 4...almost there</h2>
+        <p>We want to be able to see the comments for each post but right now we cannot. Lets fix that. Create a partial in web => templates =>
+         post folder and call it comments.html.eex</p>
+        <p>Ensure the file looks similar to below and don't forget to save it</p>
+        <pre><code>
+            <h3> Comments: </h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+            <%= for comment <- @post.comments do %>
+                <tr>
+                  <td><%= comment.name %></td>
+                  <td><%= comment.content %></td>
+                </tr>
+            <% end %>
+              </tbody>
+            </table>
+        </code></pre>
+        <p>Finally we need to render this template in the web => tempaltes => post folder inside the show.html.eex file. Paste the line just
+        below the previoulsy added line</p>
+        <code><%= render "comments.html", post: @post %></code>
 
 
 
