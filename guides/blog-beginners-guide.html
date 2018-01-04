@@ -287,7 +287,7 @@
         <p>Here we are getting the post and all of its associated comments. The comment changeset is necessary to enable us to have the comments
         form on the post view. So now we need to create the comment form. Create a new file called <code>comment_form.html.eex</code> in the
         web => templates => post folder and input the following</p>
-        <pre><code>
+        <xmp>
            <%= form_for @changeset, @action, fn f -> %>
               <%= if f.errors != [] do %>
                 < div class="alert alert-danger">
@@ -314,7 +314,7 @@
                 <%= submit "Add comment", class: "btn btn-primary" %>
               < /div>
             <% end %>
-        </code></pre>
+        </xmp>
         <p>In order to render the above template in the post show view we must update it. Navigate to web => templates => post => show.html.eex and
         input the following line just above the link lines of code</p>
         <pre><code><%= render "comment_form.html", post: @post, changeset: @changeset,
@@ -325,7 +325,7 @@ action: post_post_path(@conn, :add_comment, @post) %>
         <p>We want to be able to see the comments for each post but right now we cannot. Lets fix that. Create a partial in web => templates =>
          post folder and call it comments.html.eex</p>
         <p>Ensure the file looks similar to below and don't forget to save it</p>
-        <pre><code>
+        <xmp>
             <h3> Comments: </h3>
             <table class="table">
               <thead>
@@ -343,10 +343,13 @@ action: post_post_path(@conn, :add_comment, @post) %>
             <% end %>
               </tbody>
             </table>
-        </code></pre>
+        </xmp>
         <p>Finally we need to render this template in the web => tempaltes => post folder inside the show.html.eex file. Paste the line just
         below the previoulsy added line</p>
-        <code><%= render "comments.html", post: @post %></code>
+        <p><code><%= render "comments.html", post: @post %></code></p>
+        <p>Lets fire up our Phoenix server and test our app, we should be able to enter comments for each post. Have a play and be sure to
+        ask a mentor if all is not working as expected. Remember the console output is a great place to start if you have having any issues.</p>
+        <p>In the terminal type <code>mix phoenix.server</code> to start the server. Then open your browser window and type in <code>http://localhost:4000</code></p>
 
 
 
