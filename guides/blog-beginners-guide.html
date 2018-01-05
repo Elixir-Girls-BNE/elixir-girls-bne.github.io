@@ -150,11 +150,11 @@
         to build a simple blog post (and we might even get to add a comments section too...stay tuned)</p>
         <h2>Step 1</h2>
         <p>The first thing we need to do is create a new project and it's best to put this in its own directory. Open your terminal (be sure to
-        as an instructor if unsure) and type the following</p>
+        ask an instructor if unsure) and type the following</p>
         <p><code>mkdir elixir-girls</code>
         <p><code>cd elixir-girls</code></p>
         <p><code>mix phoenix.new blog_elixir_girls</code></p>
-        <p>This command is how we generate a project using the phoenix framework. It will automatically create a lot of folders for you. This will help
+        <p>This command is how we generate a project using the phoenix framework. It will automatically create a lot of folders and files for you. A framework helps
         us put our code in the <italic>correct</italic> place. Frameworks follow best practice based of years of other developers experience. If you take a look
         at your terminal you will see lots of output from running that one command</p>
         <p>While running the above command you might receive the following message</p>
@@ -175,8 +175,8 @@
         </p>
 
         <h2>Running the Server</h2>
-        <p>Even though we haven't done much (well in fact we have only typed in one command its a good time to see if we can run our server. From
-        inside your blog_elixir_girls directory type the following command (give it a few mins as it has a bit of work to do).
+        <p>Even though we haven't done much (well in fact we have only typed in one command it's a good time to see if we can run our server. From
+        inside your blog_elixir_girls directory type the following command (give it a few minutes as it has a bit of work to do).
         Don't worry if you see some nasty looking errors in red..its just looking for a database and we are about to do that!</p>
         <p><code>mix phoenix.server</code></p>
 
@@ -210,7 +210,7 @@
         <p>and</p>
         <p><code>mix ecto.migrate</code></p>
         <p>Now we can start our Phoenix Server again (<code>mix phoenix.server</code>). Open a browser window and enter the follow url
-            <code><code>mix phoenix.server</code></code>. You should be able to enter a new Post and see a list. Have a play, take some time and
+            <code><code>http://localhost:4000/posts</code></code>. You should be able to enter a new Post and see a list. Have a play, take some time and
         remember to keep an eye on the Phoenix Service console (that's running in your terminal window) to see what's going on behind the scenes.
         </p>
         <p>Congrats on the work you've done so far! Next lets add some comments to our blog posts :) </p>
@@ -218,7 +218,7 @@
         <p>Its time to be able to comment on each blog post. Ensure you are in the terminal window and the Phoenix server is <strong>not</strong> running. Remember
         to stop the server press ctrl-c twice. Type the following command to generate a new comments model</p>
         <p><code>mix phoenix.gen.model Comment comments name:string content:text post_id:references:posts</code></p>
-        <p>By using <code>references</code> above the Phoenix framework automatically creates the foreign key field for you and index it. Indexing helps to speed
+        <p>By using <code>references</code> above the Phoenix framework automatically creates the foreign key field for you and indexes it. Indexing helps to speed
             up searching the database (you can think of it as being similar to a book index). A foreign key in this case is a column in the
             comments table that uniquely identifies a post record in the Post table. </p>
         <p>You should also notice the output of that command has generated new files for us to use. We now need to edit some of these files.
