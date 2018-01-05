@@ -347,10 +347,20 @@ action: post_post_path(@conn, :add_comment, @post) %>
         <p>Finally we need to render this template in the web => tempaltes => post folder inside the show.html.eex file. Paste the line just
         below the previoulsy added line</p>
         <p><code><%= render "comments.html", post: @post %></code></p>
-        <p>Lets fire up our Phoenix server and test our app, we should be able to enter comments for each post. Have a play and be sure to
-        ask a mentor if all is not working as expected. Remember the console output is a great place to start if you have having any issues.</p>
-        <p>In the terminal type <code>mix phoenix.server</code> to start the server. Then open your browser window and type in <code>http://localhost:4000</code></p>
-
+        <p>Lets fire up our Phoenix server and test our app, we should be able to enter comments for each post. Have a play and remember the console output is a great place to start if you have having any issues.</p>
+        <p>In the terminal type <code>mix phoenix.server</code> to start the server. Then open your browser window and type in <code>http://localhost:4000/posts</code></p>
+        <p>You might notice a slight issue, when we save our comment it seems to disappear, this is cause when we are passing in our params we are not
+            passing in the post_id. Lets fix this now. Navigate to the web => models and open the comments.ex file. Update the <code>changeset</code> function to reflect the code below </p>
+<xmp>
+    def changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:name, :content, :post_id])
+    |> validate_required([:name, :content, :post_id])
+    end
+</xmp>
+        <p>Don't forget to save the file. Restart the Phoenix server <code>mix phoenix.server</code> and open the browser url to <code>http://localhost:4000/posts</code>. Enter
+        some posts and comments and you should be able to now see all comments associated with a post as expected</p>
+        <p>Huge contrats!!! You have just built your first Elixir App</p>
 
 
 
