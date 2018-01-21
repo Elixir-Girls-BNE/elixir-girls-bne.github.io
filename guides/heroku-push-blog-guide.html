@@ -6,7 +6,7 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
 
     <!-- Use title if it's in the page YAML frontmatter -->
-    <title>Elixir Girls Guides - Version Control (Git)</title>
+    <title>Elixir Girls Guides Heroku</title>
 
     <link href="/stylesheets/normalize.css" rel="stylesheet" /><link href="/stylesheets/all.css" rel="stylesheet" />
 
@@ -41,14 +41,14 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
 </head>
 
-  <body class="guides guides_version-control-git">
-      <nav id="mainNav" class="navbar navbar-default navbar-fixed-top guide-nav-bar">
+<body class="guides guides_channels">
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top guide-nav-bar">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -83,101 +83,85 @@
     <!-- /.container-fluid -->
 </nav>
 
-  <div id="wrapper">
+<div id="wrapper">
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="index.html">Elixir Girls Guides</a>
-    </div>
-    <!-- /.navbar-header -->
-
-    <!-- /.navbar-top-links -->
-
-    <div class="navbar-default sidebar" role="navigation">
-        <div class="sidebar-nav">
-            <ul class="nav" id="side-menu nav">
-                <li>
-                    <a id="dropdown-menu" href="#">Installation</a>
-                    <ul class="nav nav-second-level">
-                      <li>
-                          <a href="/install-guides/mac.html">Mac</a>
-                      </li>
-                      <li>
-                          <a href="/install-guides/windows.html">Windows</a>
-                      </li>
-                      <li>
-                          <a href="/install-guides/linux.html">Linux</a>
-                      </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="/install-guides/dev-tools.html">Additional Tools</a>
-                </li>
-                <li>
-                  <a href="/guides/elixir-beginners-guide.html">Beginner's Guide</a>
-                </li>
-                <li>
-                    <a href="/guides/slackir.html">Slackir App</a>
-                </li>
-                <li>
-                    <a href="/guides/channels.html">Channels</a>
-                </li>
-                <li>
-                    <a href="/guides/persistence.html">Persistence</a>
-                </li>
-                <li>
-                    <a href="/guides/blog-beginners-guide.html">Beginner's Blog Guide</a>
-                </li>
-                <li>
-                    <a href="/guides/version-control-git.html">Version Control (Git)</a>
-                </li>
-                <li>
-                    <a href="/guides/blog-git-guide.html">Push Blog to Git</a>
-                </li>
-                <li>
-                    <a href="/guides/heroku-push-blog-guide.html">Deploy Blog to Heroku</a>
-                </li>
-            </ul>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Elixir Girls Guides</a>
         </div>
-        <!-- /.sidebar-collapse -->
-    </div>
-    <!-- /.navbar-static-side -->
-</nav>
+        <!-- /.navbar-header -->
+
+        <!-- /.navbar-top-links -->
+
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav">
+                <ul class="nav" id="side-menu nav">
+                    <li>
+                        <a id="dropdown-menu" href="#">Installation</a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="/install-guides/mac.html">Mac</a>
+                            </li>
+                            <li>
+                                <a href="/install-guides/windows.html">Windows</a>
+                            </li>
+                            <li>
+                                <a href="/install-guides/linux.html">Linux</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="/install-guides/dev-tools.html">Additional Tools</a>
+                    </li>
+                    <li>
+                        <a href="/guides/elixir-beginners-guide.html">Beginner's Guide</a>
+                    </li>
+                    <li>
+                        <a href="/guides/slackir.html">Slackir App</a>
+                    </li>
+                    <li>
+                        <a href="/guides/channels.html">Channels</a>
+                    </li>
+                    <li>
+                        <a href="/guides/persistence.html">Persistence</a>
+                    </li>
+                    <li>
+                        <a href="/guides/blog-beginners-guide.html">Beginner's Blog Guide</a>
+                    </li>
+                    <li>
+                        <a href="/guides/version-control-git.html">Version Control (Git)</a>
+                    </li>
+                    <li>
+                        <a href="/guides/blog-git-guide.html">Push Blog to Git</a>
+                    </li>
+                    <li>
+                        <a href="/guides/heroku-push-blog-guide.html">Deploy Blog to Heroku</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+    </nav>
 
     <div id="page-wrapper">
-      <h1>Version Control</h1>
-<p>So you've heard about this thing <em>git</em>, but what actually is it?!</p>
-<p>Git is a version control system (VCS) that enables us to do a couple of key things when programming.</p>
-<p>Firstly, it allows us to keep track of the changes to our files over time (so if we make a mistake,
-we can easily go back).<br>Secondly, it allows many developers to work on the same code at the same time without stepping
-on each others toes!</p>
+        <h1>Deploying blog to Heroku</h1>
 
-<h2>Installing Git</h2>
-<p>You may have installed a GUI (Graphical User Interface) for Git from the
-  <a class="inline-link" href="/install-guides/dev-tools.html">Additional Tools</a> page. If you have, great! If not,
-  feel free to install one now. Installing the GUI will also install the command line tool which you
-  can access from your favourite terminal application. You don't have to use the GUI if you don't want
-  to, but it's often easier in the beginning whilst you're learning.
-</p>
-
-<h2>Trying Git out</h2>
-<p>If you want to learn more about git and how to do the fundamentals from the command line, you can
-do this great little online tutorial <a class="inline-link" href="https://try.github.io" target="_blank">tryGit</a></p>
 
     </div>
     <!-- /#page-wrapper -->
-  </div>
-  <!-- /#wrapper -->
+</div>
+<!-- /#wrapper -->
 
-  </body>
+</body>
 
-  <!-- jQuery -->
+<!-- jQuery -->
 <script src="/vendor/jquery/jquery.min.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
