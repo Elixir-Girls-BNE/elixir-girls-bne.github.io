@@ -152,8 +152,12 @@
 
     <div id="page-wrapper">
         <h1>Deploying blog to Heroku</h1>
-
-
+            <p>Signing up to Heroku is very simple, just head over to <a href="https://signup.heroku.com/">Heroku</a> and fill in the form.</p>
+        <h2>Heroku Toolbelt</h2>
+        <p>Once we have signed up, we can download the correct version of the <a href="https://devcenter.heroku.com/articles/heroku-cli">Heroku Toolbelt</a> for our system</p>
+        <p>Now that we have the Toolbelt installed, let’s create the Heroku application. In our project directory, run:</p>
+        <xmp>heroku create --buildpack "https://github.com/HashNuke/heroku-buildpack-elixir.git"</xmp>
+        
     </div>
     <!-- /#page-wrapper -->
 </div>
