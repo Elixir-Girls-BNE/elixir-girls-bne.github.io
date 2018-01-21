@@ -155,9 +155,20 @@
             <p>Signing up to Heroku is very simple, just head over to <a href="https://signup.heroku.com/">Heroku</a> and fill in the form.</p>
         <h2>Heroku Toolbelt</h2>
         <p>Once we have signed up, we can download the correct version of the <a href="https://devcenter.heroku.com/articles/heroku-cli">Heroku Toolbelt</a> for our system</p>
-        <p>Now that we have the Toolbelt installed, let’s create the Heroku application. In our project directory, run:</p>
+        <p>Now that we have the Toolbelt installed, let’s create the Heroku application. From our terminal windown, in our project directory, run:</p>
         <xmp>heroku create --buildpack "https://github.com/HashNuke/heroku-buildpack-elixir.git"</xmp>
-        
+        <p>You should see output similar to below </p>
+        <img src="/images/heroku-create.png" alt="heroku commands" width="80%" >
+        <p>the name of the Heroku application is the random string after “Creating” in the output above (https://fast-journey-73963.herokuapp.com/).
+            This will be unique, so expect to see a different name from “fast-journey-73963”.</p>
+        <p>The --buildpack option we are passing allows us to specify the Elixir buildpack we want Heroku to use. A buildpack is a convenient way of packaging
+            framework and/or runtime support. In our case it’s installing our application dependencies before we run it.</p>
+        <p> Next step is to add the Phoenix Static Buildpack.
+            We need to compile static assets for a successful Phoenix deployment.
+            The Phoenix static buildpack can take care of that for us, so let’s add it now inside your project directory in the terminal window.</p>
+        <xmp>heroku buildpacks:add https://github.com/gjaldon/heroku-buildpack-phoenix-static.git</xmp>
+        <p>Your output from the above command should be similar to below</p>
+        <img src="/images/heroku-phoenix-buildpack.png" alt="heroku buildpack commands" width="80%" >
     </div>
     <!-- /#page-wrapper -->
 </div>
