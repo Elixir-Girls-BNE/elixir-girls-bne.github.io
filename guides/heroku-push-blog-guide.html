@@ -155,11 +155,11 @@
             <p>Signing up to Heroku is very simple, just head over to <a href="https://signup.heroku.com/">Heroku</a> and fill in the form.</p>
         <h2>Heroku Toolbelt</h2>
         <p>Once we have signed up, we can download the correct version of the <a href="https://devcenter.heroku.com/articles/heroku-cli">Heroku Toolbelt</a> for our system</p>
-        <p>Now that we have the Toolbelt installed, let’s create the Heroku application. From our terminal windown, in our project directory, run:</p>
+        <p>Now that we have the Toolbelt installed, let’s create the Heroku application. From our terminal window, in our project directory, run:</p>
         <xmp>heroku create --buildpack "https://github.com/HashNuke/heroku-buildpack-elixir.git"</xmp>
         <p>You should see output similar to below </p>
-        <img src="/images/heroku-create.png" alt="heroku commands" width="80%" >
-        <p>the name of the Heroku application is the random string after “Creating” in the output above (https://fast-journey-73963.herokuapp.com/).
+        <p><img src="/images/heroku-create.png" alt="heroku commands" width="100%" ></p>
+        <p>The name of the Heroku application is the random string after “Creating app...” in the output above (https://fast-journey-73963.herokuapp.com/).
             This will be unique, so expect to see a different name from “fast-journey-73963”.</p>
         <p>The --buildpack option we are passing allows us to specify the Elixir buildpack we want Heroku to use. A buildpack is a convenient way of packaging
             framework and/or runtime support. In our case it’s installing our application dependencies before we run it.</p>
@@ -168,7 +168,83 @@
             The Phoenix static buildpack can take care of that for us, so let’s add it now inside your project directory in the terminal window.</p>
         <xmp>heroku buildpacks:add https://github.com/gjaldon/heroku-buildpack-phoenix-static.git</xmp>
         <p>Your output from the above command should be similar to below</p>
-        <img src="/images/heroku-phoenix-buildpack.png" alt="heroku buildpack commands" width="80%" >
+        <p><img src="/images/heroku-phoenix-buildpack.png" alt="heroku buildpack commands"  width="100%"></p>
+        <p>We also need to add the Heroku Postgres add-on click <a href="https://elements.heroku.com/addons/heroku-postgresql">here</a> to get started </p>
+        <p>Click the <strong>Install Heroku Postgres</strong> button</p>
+        <img src="/images/heroku_install_postgres.png" alt="heroku postgres commands"  width="100%">
+        <p>You will be prompted to select the name of your application from the drop down box. In this guide the application is called
+        <strong>fast-journey-73963</strong></p>
+        <p>The plan name will be similar to <code>Hobby Dev - Free</code>, simply select the provision button </p>
+        <img src="/images/heroku_provision.png" alt="heroku provision commands"  width="50%">
+        <h2>Modifying Some Files</h2>
+        <p>We need to create a file in the root of our project called <code>Procfile</code> with the following content</p>
+        <p><code>web: MIX_ENV=prod mix phoenix.server</code></p>
+        <p>Don't forget to save</p>
+
+        <p>Next we need to open the file called prod.exs inside the config folder and replace the line</p>
+        <code>cache_static_manifest: "priv/static/manifest.json"</code> with
+        <xmp>
+            cache_static_manifest: "priv/static/manifest.json",
+            secret_key_base: System.get_env("SECRET_KEY_BASE")
+        </xmp>
+        <p>Here we’re saying that we want the secret_key_base value to be taken from the environment variable <strong>SECRET_KEY_BASE</strong></p>
+        <p>Next step we need to replace <code>url: [host: "example.com", port: 80],</code> with the name given to you by heroku for your app. Please
+            not this will <strong>not</strong> be the same as the sample below. Simply replace the host with your app name. Don't
+            forget to ask a mentor if you're stuck</p>
+        <p><code>url: [scheme: "https", host: "fast-journey-73963.herokuapp.com", port: 443],</code><br />
+           <code>force_ssl: [rewrite_on: [:x_forwarded_proto]],</code>
+        </p>
+        <p>Finally we need to add/modify the following lines so the file resembles below</p>
+        <xmp>
+            config :blog_elixir_girls, BlogElixirGirls.Endpoint,
+            http: [port: {:system, "PORT"}],
+            url: [scheme: "https", host: "fast-journey-73963.herokuapp.com", port: 443],
+            force_ssl: [rewrite_on: [:x_forwarded_proto]],
+            cache_static_manifest: "priv/static/manifest.json",
+            secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE")
+
+
+            # Do not print debug messages in production
+            config :logger, level: :info
+
+            # Configure your database
+            config :blog_elixir_girls, BlogElixirGirls.Repo,
+            adapter: Ecto.Adapters.Postgres,
+            username: "postgres",
+            password: "postgres",
+            database: "blog_elixir_girls_prod",
+            pool_size: 20,
+            ssl: true
+        </xmp>
+        <p>Find the line <code>import_config "prod.secret.exs"</code>, it's located towards the end of the file and delete it. Save your file :) </p>
+        <p>Almost there..open the file in web/channels/user_socket.ex and replace the line <code>transport :websocket, Phoenix.Transports.WebSocket</code> with </p>
+        <xmp>
+            transport :websocket, Phoenix.Transports.WebSocket,
+            timeout: 45_000
+        </xmp>
+        <p>Save all files and return to your terminal window. Lets finish this off!</p>
+        <p>From within your project folder input the following command</p>
+        <p><code>heroku addons:create heroku-postgresql:hobby-dev</code></p>
+        <p><code>heroku config:set POOL_SIZE=18</code></p>
+        <p><code>heroku run "POOL_SIZE=2 mix blog_elixir_girls.task"</code></p>
+        <p>You need to create the secret key we set in a previous step above. Lets do this now. At the terminal type the following</p>
+        <p><code>mix phoenix.gen.secret</code></p>
+        <p>A random string will be generated. Now we need to set this in Heroku (remember to use the string your terminal generated and not
+        the one in the example below. In the terminal window enter the following </p>
+        <p><code>heroku config:set SECRET_KEY_BASE="yH94rMfqsMpyLW4vkpAELsKLj3o01Shht/hyoTNslPjUo8Xxey3QNeDFdFqn2boN"</code></p>
+        <h2>Deploy time</h2>
+        <p>Let's commit all our changes, from the terminal window do the following</p>
+        <xmp>
+            git add config/prod.exs
+            git add Procfile
+            git add web/channels/user_socket.ex
+            git commit -m 'setting up heroku to use our elixir girls blog app"
+        </xmp>
+        <h3>Deploy</h3>
+        <p><code>git push heroku master</code></p>
+        <p>Hopefully this will work without issue. When done you still need to migrate, so for the final time let's do the following</p>
+        <p><code>heroku run "POOL_SIZE=2 mix ecto.create"</code></p>
+        <p><code>heroku run "POOL_SIZE=2 mix ecto.migrate"</code></p>
     </div>
     <!-- /#page-wrapper -->
 </div>
