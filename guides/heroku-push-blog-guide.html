@@ -207,14 +207,13 @@
             # Do not print debug messages in production
             config :logger, level: :info
 
-            # Configure your database
             config :blog_elixir_girls, BlogElixirGirls.Repo,
             adapter: Ecto.Adapters.Postgres,
-            username: "postgres",
-            password: "postgres",
-            database: "blog_elixir_girls_prod",
+            username: System.get_env("USER_URL"),
+            url: System.get_env("DATABASE_URL"),
             pool_size: 20,
             ssl: true
+
         </xmp>
         <p>Find the line <code>import_config "prod.secret.exs"</code>, it's located towards the end of the file and delete it. Save your file :) </p>
         <p>Almost there..open the file in web/channels/user_socket.ex and replace the line <code>transport :websocket, Phoenix.Transports.WebSocket</code> with </p>
@@ -239,12 +238,15 @@
             git add Procfile
             git add web/channels/user_socket.ex
             git commit -m 'setting up heroku to use our elixir girls blog app"
+            git push -u heroku master
         </xmp>
         <h3>Deploy</h3>
         <p><code>git push heroku master</code></p>
         <p>Hopefully this will work without issue. When done you still need to migrate, so for the final time let's do the following</p>
-        <p><code>heroku run "POOL_SIZE=2 mix ecto.create"</code></p>
         <p><code>heroku run "POOL_SIZE=2 mix ecto.migrate"</code></p>
+        <h2>You are done!!!!</h2>
+        <p>Type <code>heroku open</code> in your terminal window. Your browers window will open and will be similar to below</p>
+        <p><img src="/images/heroku_done.png" alt="heroku deployed"  width="100%"></p></p>
     </div>
     <!-- /#page-wrapper -->
 </div>
