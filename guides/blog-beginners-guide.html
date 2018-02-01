@@ -190,20 +190,20 @@
         <p><code>http://localhost:4000</code></p>
         <p>You should see the Phoenix Framework Welcome Page as below</p>
         <img src="/images/phoenix_welcome.png" alt="Phoenix welcome" width="80%" >
-        <p>To terminate the server type ctl-c twice. You should now be back in your terminal window ready to type in more commands </p>
+        <p>To terminate the server press ctrl-c twice. You should now be back in your terminal window ready to type in more commands </p>
         <p>PS don't be alarmed if you see some nasty looking red errors in the console window, we're going to fix these shortly</p>
 
         <h2>Step 2</h2>
         <p>Lets use one of the built in Phoenix generators to create our MVC architecture. FYI Phoenix comes with 4 kinds of generators more on this
         later :) For now simply type the command below into the terminal</p>
         <p><code>mix phoenix.gen.html Post posts title:string body:text</code></p>
-        <p>The Phoenix generator has just created a model, view, controller (aswell as some tests and a database connection). We must declare the resource
-        (that's the <strong>Post</strong> bit in singular and plural for this command to work. We must also specify the type of fields we will need our
+        <p>The Phoenix generator has just created a model, view, controller (as well as some tests and a database connection). We must declare the resource
+        (that's the <strong>Post</strong> bit in singular and plural for this command to work). We must also specify the type of fields we will need our
         resource to have. In this case we need a title which is of type <strong>String</strong> and body which is of type <strong>text</strong>. String and Text
         are very similar but text can allow for more data to be input than string. The output will look similar to below</p>
         <img src="/images/phoenix_scaffold.png" alt="Phoenix scaffold" width="80%" >
-        <p>Next you need to simply follow the commands that your terminal window has informed you of. Its really good practice to watch our terminal window
-        for hints about next actions and any issues. Open sublime and navigate to the folder web->router.ex and enter the Post route under scope "/".
+        <p>Next you need to simply follow the commands that your terminal window has informed you of. It's really good practice to watch our terminal window
+        for hints about next actions and any issues. Open sublime and navigate to the folder web -> router.ex and enter the Post route under scope "/".
         When done it should look similar to below. Leave the rest of the file as is. Remember to save!</p>
         <pre><code>
             scope "/", BlogElixirGirls do
@@ -220,7 +220,7 @@
             <code><code>http://localhost:4000/posts</code></code>. You should be able to enter a new Post and see a list. Have a play, take some time and
         remember to keep an eye on the Phoenix Service console (that's running in your terminal window) to see what's going on behind the scenes.
         </p>
-        <p>Congrats on the work you've done so far! Next lets add some comments to our blog posts :) </p>
+        <p>Congrats on the work you've done so far! Next let's add some comments to our blog posts :) </p>
         <h2>Adding Comments</h2>
         <p>Its time to be able to comment on each blog post. Ensure you are in the terminal window and the Phoenix server is <strong>not</strong> running. Remember
         to stop the server press ctrl-c twice. Type the following command to generate a new comments model</p>
@@ -230,10 +230,10 @@
             comments table that uniquely identifies a post record in the Post table. </p>
         <p>You should also notice the output of that command has generated new files for us to use. We now need to edit some of these files.
         Lets start by adding the relationship between the Comments resource and the Posts resource to their corresponding models. In sublime navigate
-         to the following file Web -> Models -> comment.ex, open the file and add the following line.</p>
+         to the following file web -> models -> comment.ex, open the file and add the following line.</p>
         <p>The section of code should now resemble below</p>
         <img src="/images/phoenix_belongs_to.png" alt="Phoenix models" width="80%" >
-        <p>We now need to create the other side of this relations inside our Post model. Naviate to and open the file Web -> Models ->
+        <p>We now need to create the other side of this relations inside our Post model. Navigate to and open the file web -> models ->
             post.ex. Here we are telling our Post model that it can have many comments assocated to it. Don't forget to save the files. The
         final code should resemble below</p>
         <img src="/images/phoenix_has_many.png" alt="Phoenix models" width="70%" >
@@ -241,21 +241,21 @@
         <p>From the command line run the following</p>
         <p><code>mix ecto.migrate</code></p>
         <p>Hopefully we should be on track with no issues (remember to call a mentor if you are stuck). Next we need to update our routes. Open the
-        router.ex file under the <b>Web</b> folder and add the following to the scope "/".  Update the file so it resembles below. All we are doing here is add a route for comments underneath
+        router.ex file under the <b>web</b> folder and add the following to the scope "/".  Update the file so it resembles below. All we are doing here is add a route for comments underneath
             the posts route. This will become clearly shortly </p>
 
         <img src="/images/routes.png" alt="Phoenix routes" width="70%" >
         <p>Routes are a big topic in themselves but in a nutshell we have just made comment to be nested under posts. This really means we can't have
         a comment without first having a post and also each comment belongs to (or is associated with) a post.</p>
-        <p>Lets go back to our terminal window and look at our routes. We can do this anytime in a project and its a good habit to get into. </p>
+        <p>Lets go back to our terminal window and look at our routes. We can do this anytime in a project and it's a good habit to get into. </p>
         <p><code>mix phoenix.routes</code></p>
         <img src="/images/phoenix_routes.png" alt="Phoenix routes" width="70%" >
         <p>The route that has the red arrow is the one we are currently interested in. It tells us exactly what the url needs to be in order to create
-        a comment. Don't be confused. We have a lightening talk about routes coming up. Just go with it for now :) </p>
+        a comment. Don't be confused. We have a lightning talk about routes coming up. Just go with it for now :) </p>
         <p>Before we move on it's a good time to create an alias for the Comment model. Elixir allows us to set up an alias for any module name.
         In our project the module name is <code>BlogElixirGirls</code> and therefore the fully-qualified name for our Comment model is
             BlogElixirGirls.Comment but we can shorten this name to just Comment by using an alias...so let's do that now</p>
-        <p>Navigate and open the post_controller.ex file inside the Web -> Controllers folder and add this line at the top, right underneath the
+        <p>Navigate and open the post_controller.ex file inside the web -> controllers folder and add this line at the top, right underneath the
         existing alias (alias BlogElixirGirls.Post)</p>
 
         <p><code>alias BlogElixirGirls.Comment, as: Comment</code></p>
@@ -279,9 +279,9 @@
   end
 
         </code></pre>
-      <p>The <code>Comment.changeset</code> function is defined in the model (web => models => comment.ex) and its purpose is to ensure
+      <p>The <code>Comment.changeset</code> function is defined in the model (web -> models -> comment.ex) and its purpose is to ensure
       the data is in the correct format and valid before being saved to our comment table in the database</p>
-        <p>We next need to update show function inside the post_controller.ex file. Navigate to it (remember its under web => controllers).
+        <p>We next need to update show function inside the post_controller.ex file. Navigate to it (remember it's under web -> controllers).
             Change the show function be reflect the changes below
         </p>
 <pre><code>
@@ -293,36 +293,36 @@
 </code></pre>
         <p>Here we are getting the post and all of its associated comments. The comment changeset is necessary to enable us to have the comments
         form on the post view. So now we need to create the comment form. Create a new file called <code>comment_form.html.eex</code> in the
-        web => templates => post folder and input the following</p>
+        web -> templates -> post folder and input the following</p>
         <xmp>
            <%= form_for @changeset, @action, fn f -> %>
-              <%= if f.errors != [] do %>
-                < div class="alert alert-danger">
-                  <p>Oops, something went wrong! Please check the errors below:</p>
-                  <ul>
-                    <%= for {attr, message} <- f.errors do %>
-                      <li><%= humanize(attr) %> <%= message %></li>
-                    <% end %>
-                  </ul>
-                < /div>
-              <% end %>
+             <%= if f.errors != [] do %>
+               <div class="alert alert-danger">
+                 <p>Oops, something went wrong! Please check the errors below:</p>
+                 <ul>
+                   <%= for {attr, message} <- f.errors do %>
+                     <li><%= humanize(attr) %> <%= message %></li>
+                   <% end %>
+                 </ul>
+               </div>
+             <% end %>
 
-              < div class="form-group">
-                <label>Name</label>
-                <%= text_input f, :name, class: "form-control" %>
-              < /div>
+             <div class="form-group">
+               <label>Name</label>
+               <%= text_input f, :name, class: "form-control" %>
+             </div>
 
-              < div class="form-group">
-                <label>Content</label>
-                <%= textarea f, :content, class: "form-control" %>
-              < /div>
+             <div class="form-group">
+               <label>Content</label>
+               <%= textarea f, :content, class: "form-control" %>
+             </div>
 
-              < div class="form-group">
-                <%= submit "Add comment", class: "btn btn-primary" %>
-              < /div>
-            <% end %>
+             <div class="form-group">
+               <%= submit "Add comment", class: "btn btn-primary" %>
+             </div>
+           <% end %>
         </xmp>
-        <p>In order to render the above template in the post show view we must update it. Navigate to web => templates => post => show.html.eex and
+        <p>In order to render the above template in the post show view we must update it. Navigate to web -> templates -> post -> show.html.eex and
         input the following line just above the link lines of code</p>
         <pre><code><%= render "comment_form.html", post: @post, changeset: @changeset,
 action: post_post_path(@conn, :add_comment, @post) %>
