@@ -187,7 +187,7 @@
         <p><code>mix phoenix.server</code></p>
 
         <p>Now open a browser window and enter the following url</p>
-        <p><code>http://localhost:4000</code></p>
+        <p><code><a href="http://localhost:4000">http://localhost:4000</a></code></p>
         <p>You should see the Phoenix Framework Welcome Page as below</p>
         <img src="/images/phoenix_welcome.png" alt="Phoenix welcome" width="80%" >
         <p>To terminate the server press ctrl-c twice. You should now be back in your terminal window ready to type in more commands </p>
@@ -205,19 +205,17 @@
         <p>Next you need to simply follow the commands that your terminal window has informed you of. It's really good practice to watch our terminal window
         for hints about next actions and any issues. Open sublime and navigate to the folder web -> router.ex and enter the Post route under scope "/".
         When done it should look similar to below. Leave the rest of the file as is. Remember to save!</p>
-        <pre><code>
-            scope "/", BlogElixirGirls do
-            pipe_through :browser # Use the default browser stack
-            resources "/posts", PostController
-            get "/", PageController, :index
-            end
-        </code></pre>
+        <pre><code>scope "/", BlogElixirGirls do
+    pipe_through :browser # Use the default browser stack
+    resources "/posts", PostController
+    get "/", PageController, :index
+end</code></pre>
         <p>Return to your terminal window and type in the command below</p>
         <p><code>mix ecto.create</code></p>
         <p>and</p>
         <p><code>mix ecto.migrate</code></p>
         <p>Now we can start our Phoenix Server again (<code>mix phoenix.server</code>). Open a browser window and enter the follow url
-            <code><code>http://localhost:4000/posts</code></code>. You should be able to enter a new Post and see a list. Have a play, take some time and
+          <code><code><a href="http://localhost:4000/posts">http://localhost:4000/posts</a></code></code>. You should be able to enter a new Post and see a list. Have a play, take some time and
         remember to keep an eye on the Phoenix Service console (that's running in your terminal window) to see what's going on behind the scenes.
         </p>
         <p>Congrats on the work you've done so far! Next let's add some comments to our blog posts :) </p>
@@ -233,8 +231,8 @@
          to the following file web -> models -> comment.ex, open the file and add the following line.</p>
         <p>The section of code should now resemble below</p>
         <img src="/images/phoenix_belongs_to.png" alt="Phoenix models" width="80%" >
-        <p>We now need to create the other side of this relations inside our Post model. Navigate to and open the file web -> models ->
-            post.ex. Here we are telling our Post model that it can have many comments assocated to it. Don't forget to save the files. The
+        <p>We now need to create the other side of this relations inside our Post model. Naviate to and open the file web -> models ->
+        post.ex. Add <code>has_many :comments, BlogElixirGirls.Comment</code> after the line <code>field :body, :string</code>. Here we are telling our Post model that it can have many comments assocated to it. Don't forget to save the files. The
         final code should resemble below</p>
         <img src="/images/phoenix_has_many.png" alt="Phoenix models" width="70%" >
         <p>Ensure all files are saved. We are now ready to run the new migration which is very similar to what we did in Step 2 above</p>
@@ -244,6 +242,15 @@
         router.ex file under the <b>web</b> folder and add the following to the scope "/".  Update the file so it resembles below. All we are doing here is add a route for comments underneath
             the posts route. This will become clearly shortly </p>
 
+        <pre><code>scope "/", BlogElixirGirls do
+  pipe_through :browser # Use the default browser stack
+
+  resources "/posts", PostController do
+    post "/comment", PostController, :add_comment
+  end
+
+  get "/", PageController, :index
+end</code></pre>
         <img src="/images/routes.png" alt="Phoenix routes" width="70%" >
         <p>Routes are a big topic in themselves but in a nutshell we have just made comment to be nested under posts. This really means we can't have
         a comment without first having a post and also each comment belongs to (or is associated with) a post.</p>
@@ -264,110 +271,102 @@
         <p><code>plug :scrub_params, "comment" when action in [:add_comment]</code></p>
         <p>The next step is to define the <strong>add_comment</strong> function</p>
         <pre><code>def add_comment(conn, %{"comment" => comment_params, "post_id" => post_id}) do
-    changeset = Comment.changeset(%Comment{}, Map.put(comment_params, "post_id", post_id))
-    post = Post |> Repo.get(post_id) |> Repo.preload([:comments])
+  changeset = Comment.changeset(%Comment{}, Map.put(comment_params, "post_id", post_id))
+  post = Post |> Repo.get(post_id) |> Repo.preload([:comments])
 
-    if changeset.valid? do
-      Repo.insert(changeset)
+  if changeset.valid? do
+    Repo.insert(changeset)
 
-      conn
-      |> put_flash(:info, "Comment added.")
-      |> redirect(to: post_path(conn, :show, post))
-    else
-      render(conn, "show.html", post: post, changeset: changeset)
-    end
+    conn
+    |> put_flash(:info, "Comment added.")
+    |> redirect(to: post_path(conn, :show, post))
+  else
+    render(conn, "show.html", post: post, changeset: changeset)
   end
-
+end
         </code></pre>
       <p>The <code>Comment.changeset</code> function is defined in the model (web -> models -> comment.ex) and its purpose is to ensure
       the data is in the correct format and valid before being saved to our comment table in the database</p>
-        <p>We next need to update show function inside the post_controller.ex file. Navigate to it (remember it's under web -> controllers).
+        <p>We next need to update show function inside the post_controller.ex file. Navigate to it (remember its under web -> controllers).
             Change the show function be reflect the changes below
         </p>
-<pre><code>
-    def show(conn, %{"id" => id}) do
-      post = Repo.get(Post, id) |> Repo.preload([:comments])
-      changeset = Comment.changeset(%Comment{})
-      render(conn, "show.html", post: post, changeset: changeset)
-    end
-</code></pre>
+<pre><code>def show(conn, %{"id" => id}) do
+  post = Repo.get(Post, id) |> Repo.preload([:comments])
+  changeset = Comment.changeset(%Comment{})
+  render(conn, "show.html", post: post, changeset: changeset)
+end</code></pre>
         <p>Here we are getting the post and all of its associated comments. The comment changeset is necessary to enable us to have the comments
         form on the post view. So now we need to create the comment form. Create a new file called <code>comment_form.html.eex</code> in the
         web -> templates -> post folder and input the following</p>
-        <xmp>
-           <%= form_for @changeset, @action, fn f -> %>
-              <%= if f.errors != [] do %>
-                <div class="alert alert-danger">
-                  <p>Oops, something went wrong! Please check the errors below:</p>
-                  <ul>
-                    <%= for {attr, message} <- f.errors do %>
-                      <li><%= humanize(attr) %> <%= message %></li>
-                    <% end %>
-                  </ul>
-                </div>
-              <% end %>
 
-              <div class="form-group">
-                <label>Name</label>
-                <%= text_input f, :name, class: "form-control" %>
-              </div>
+        <xmp><%= form_for @changeset, @action, fn f -> %>
+   <%= if f.errors != [] do %>
+     <div class="alert alert-danger">
+       <p>Oops, something went wrong! Please check the errors below:</p>
+       <ul>
+         <%= for {attr, message} <- f.errors do %>
+           <li><%= humanize(attr) %> <%= message %></li>
+         <% end %>
+       </ul>
+     </div>
+   <% end %>
 
-              <div class="form-group">
-                <label>Content</label>
-                <%= textarea f, :content, class: "form-control" %>
-              </div>
+   <div class="form-group">
+     <label>Name</label>
+     <%= text_input f, :name, class: "form-control" %>
+   </div>
 
-              <div class="form-group">
-                <%= submit "Add comment", class: "btn btn-primary" %>
-              </div>
-            <% end %>
-        </xmp>
+   <div class="form-group">
+     <label>Content</label>
+     <%= textarea f, :content, class: "form-control" %>
+   </div>
+
+   <div class="form-group">
+     <%= submit "Add comment", class: "btn btn-primary" %>
+   </div>
+<% end %></xmp>
         <p>In order to render the above template in the post show view we must update it. Navigate to web -> templates -> post -> show.html.eex and
         input the following line just above the link lines of code</p>
-        <pre><code><%= render "comment_form.html", post: @post, changeset: @changeset,
-action: post_post_path(@conn, :add_comment, @post) %>
+        <pre><code><%= render "comment_form.html", post: @post, changeset: @changeset, action: post_post_path(@conn, :add_comment, @post) %>
 </code></pre>
 
         <h2>Step 4...almost there</h2>
-        <p>We want to be able to see the comments for each post but right now we cannot. Lets fix that. Create a partial in web => templates =>
-         post folder and call it comments.html.eex</p>
+        <p>We want to be able to see the comments for each post but right now we cannot. Lets fix that. Create a partial in web -> templates ->
+        post folder and call it <code>comments.html.eex</code></p>
         <p>Ensure the file looks similar to below and don't forget to save it</p>
-        <xmp>
-            <h3> Comments: </h3>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-            <%= for comment <- @post.comments do %>
-                <tr>
-                  <td><%= comment.name %></td>
-                  <td><%= comment.content %></td>
-                </tr>
-            <% end %>
-              </tbody>
-            </table>
-        </xmp>
-        <p>Finally we need to render this template in the web => tempaltes => post folder inside the show.html.eex file. Paste the line just
+        <xmp><h3> Comments: </h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for comment <- @post.comments do %>
+    <tr>
+      <td><%= comment.name %></td>
+      <td><%= comment.content %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table></xmp>
+<p>Finally we need to render this template in the web -> templates -> post folder inside the <code>show.html.eex</code> file. Paste the line just
         below the previoulsy added line</p>
         <p><code><%= render "comments.html", post: @post %></code></p>
         <p>Lets fire up our Phoenix server and test our app, we should be able to enter comments for each post. Have a play and remember the console output is a great place to start if you have having any issues.</p>
-        <p>In the terminal type <code>mix phoenix.server</code> to start the server. Then open your browser window and type in <code>http://localhost:4000/posts</code></p>
-        <p>You might notice a slight issue, when we save our comment it seems to disappear, this is cause when we are passing in our params we are not
-            passing in the post_id. Lets fix this now. Navigate to the web => models and open the comment.ex file. Update the <code>changeset</code> function to reflect the code below </p>
-<xmp>
-    def changeset(struct, params \\ %{}) do
+        <p>In the terminal type <code>mix phoenix.server</code> to start the server. Then open your browser window and visit <code><a href="http://localhost:4000/posts">http://localhost:4000/posts</a></code></p>
+        <p>You might notice a slight issue, when we save our comment it seems to disappear, this is because when we are passing in our params we are not
+        passing in the post_id. Lets fix this now. Navigate to the web -> models and open the <code>comment.ex</code> file. Update the <code>changeset</code> function to reflect the code below </p>
+<pre><code>def changeset(struct, params \\ %{}) do
+
     struct
     |> cast(params, [:name, :content, :post_id])
     |> validate_required([:name, :content, :post_id])
-    end
-</xmp>
-        <p>Don't forget to save the file. Restart the Phoenix server <code>mix phoenix.server</code> and open the browser url to <code>http://localhost:4000/posts</code>. Enter
+end</code></pre>
+        <p>Don't forget to save the file. Restart the Phoenix server <code>mix phoenix.server</code> and open the browser url to <code><a href="http://localhost:4000/posts">http://localhost:4000/posts</a></code>. Enter
         some posts and comments and you should be able to now see all comments associated with a post as expected</p>
-        <p>Huge contrats!!! You have just built your first Elixir App</p>
+        <p>Huge congrats!!! You have just built your first Elixir App</p>
 
 
 
