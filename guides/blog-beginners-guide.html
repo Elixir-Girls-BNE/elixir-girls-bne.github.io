@@ -155,92 +155,94 @@
         <p>Welcome to Elixir Girls! This guide is for those of you with little or no experience of programming. Together we are going
         to build a simple blog post (and we might even get to add a comments section too...stay tuned)</p>
         <h2>Step 1</h2>
-        <p>The first thing we need to do is create a new project and it's best to put this in its own directory. Open your terminal (be sure to
-        ask an instructor if unsure) and type the following</p>
+        <p>The first thing we need to do is create a new project. It's best to put this in its own directory. Open your terminal (be sure to ask an instructor if unsure) and type the following:</p>
         <p><code>mkdir elixir-girls</code>
         <p><code>cd elixir-girls</code></p>
         <p><code>mix phoenix.new blog_elixir_girls</code></p>
-        <p>This command is how we generate a project using the phoenix framework. It will automatically create a lot of folders and files for you. A framework helps
-        us put our code in the <italic>correct</italic> place. Frameworks follow best practice based of years of other developers experience. If you take a look
-        at your terminal you will see lots of output from running that one command</p>
-        <p>While running the above command you might receive the following message</p>
+        <p>This last command is how we generate a project using the Phoenix framework. It will automatically create a lot of folders and files for you. Frameworks follow best practice based of years of other developers experience, and help you put your code in the <italic>correct</italic> place. If you take a look
+        at your terminal you will see lots of output from running that one command!</p>
+        <p>While running the above command you might receive the following message:</p>
         <p><code>Fetch and install dependencies? [Yn] Y</code></p>
-        <p>If so simply type <code>Y</code></p>
-        <p>The output in your terminal will look something like below</p>
+        <p>If so simply type <code>Y</code>.</p>
+        <p>The output in your terminal will look something like the following:</p>
         <img src="/images/phoenix_generate_output.png" alt="Phoenix generator output" width="80%" >
-        <p>Now that the project has started you should cd (stands for change directory) into the new <italic>blog_elixir_girls</italic> folder.
+        <br />
+        <p>Now that the project has started you should cd (short for change directory) into the new <italic>blog_elixir_girls</italic> folder.
         Simply type the command below</p>
         <p><code>cd blog_elixir_girls</code></p>
-        <p>If at any stage you are unsure which directory you are in simply type the command below</p>
+        <p>If, at any stage, you are unsure which directory you are in simply type the following command:</p>
         <p><code>pwd</code></p>
-        <p>This stands for <strong>p</strong>rint <strong>w</strong>orking <strong>d</strong>irectory and will always show you the full path of the directory (or folder) you are in </p>
+        <p>This stands for <strong>p</strong>rint <strong>w</strong>orking <strong>d</strong>irectory and will always show you the full path of the directory (or folder) you are in.</p>
 
         <h2>Open Sublime</h2>
-        <p>Lets open sublime which you might remember is the text editor we installed earlier. Navigate to the directory/folder where you new project
-            is stored (remember the project is called <strong>blog_elixir_girls</strong>. Just ask a mentor if unsure)
+        <p>Let's open Sublime, which is the text editor we installed earlier. Navigate to the directory/folder of your new project (the project is called <strong>blog_elixir_girls</strong>. Just ask a mentor if unsure)
         </p>
 
         <h2>Running the Server</h2>
-        <p>Even though we haven't done much (well in fact we have only typed in one command it's a good time to see if we can run our server. From
-        inside your blog_elixir_girls directory type the following command (give it a few minutes as it has a bit of work to do).
-        Don't worry if you see some nasty looking errors in red..its just looking for a database and we are about to do that!</p>
+        <p>Even though we haven't done much (in fact we have only typed in one command!), it's a good time to see if we can run our server.</p>
+        <p>From
+        inside your blog_elixir_girls directory type the following command:</p>
         <p><code>mix phoenix.server</code></p>
-
-        <p>Now open a browser window and enter the following url</p>
+        <p>Give it a few minutes to execute as it has a lot of work to do.
+        Don't worry if you see some nasty-looking errors in red..it's just looking for a database that we haven't yet created.</p>
+        <p>Now, open a browser window and enter the following url:</p>
         <p><code><a href="http://localhost:4000">http://localhost:4000</a></code></p>
-        <p>You should see the Phoenix Framework Welcome Page as below</p>
+        <p>You should see the Phoenix Framework Welcome Page as below:</p>
         <img src="/images/phoenix_welcome.png" alt="Phoenix welcome" width="80%" >
-        <p>To terminate the server press ctrl-c twice. You should now be back in your terminal window ready to type in more commands </p>
-        <p>PS don't be alarmed if you see some nasty looking red errors in the console window, we're going to fix these shortly</p>
+        <p>To terminate the server, press ctrl-c twice. You should now be back in your terminal window ready to type in more commands.</p>
+        <p>PS, don't be alarmed if you see some nasty-looking red errors in the console window, we're going to fix these shortly.</p>
 
         <h2>Step 2</h2>
-        <p>Lets use one of the built in Phoenix generators to create our MVC architecture. FYI Phoenix comes with 4 kinds of generators more on this
-        later :) For now simply type the command below into the terminal</p>
+        <p>Let's use one of the built in Phoenix generators to create our MVC architecture. FYI Phoenix comes with four kinds of generators, more on this later :) For now, simply type the command below into the terminal:</p>
         <p><code>mix phoenix.gen.html Post posts title:string body:text</code></p>
         <p>The Phoenix generator has just created a model, view, controller (as well as some tests and a database connection). We must declare the resource
         (that's the <strong>Post</strong> bit in singular and plural for this command to work). We must also specify the type of fields we will need our
-        resource to have. In this case we need a title which is of type <strong>String</strong> and body which is of type <strong>text</strong>. String and Text
-        are very similar but text can allow for more data to be input than string. The output will look similar to below</p>
+        resource to have. In this case we need a title which is of type <strong>String</strong> and body which is of type <strong>Text</strong>. String and Text
+        are very similar but text can allow for more data to be input than string. The output will look similar to the following:</p>
         <img src="/images/phoenix_scaffold.png" alt="Phoenix scaffold" width="80%" >
-        <p>Next you need to simply follow the commands that your terminal window has informed you of. It's really good practice to watch our terminal window
-        for hints about next actions and any issues. Open sublime and navigate to the folder web -> router.ex and enter the Post route under scope "/".
+        <br />
+        <p>Next, you simply follow the commands that your terminal window has informed you to do. It is good practice to watch your terminal window
+        for hints about next actions and any issues.</p>
+        <p>Open Sublime and navigate to the folder web -> router.ex and enter the Post route under scope "/".
         When done it should look similar to below. Leave the rest of the file as is. Remember to save!</p>
         <pre><code>scope "/", BlogElixirGirls do
     pipe_through :browser # Use the default browser stack
     resources "/posts", PostController
     get "/", PageController, :index
 end</code></pre>
-        <p>Return to your terminal window and type in the command below</p>
+        <p>Return to your terminal window and type in the following command:</p>
         <p><code>mix ecto.create</code></p>
-        <p>and</p>
+        <p>followed by</p>
         <p><code>mix ecto.migrate</code></p>
-        <p>Now we can start our Phoenix Server again (<code>mix phoenix.server</code>). Open a browser window and enter the follow url
-          <code><code><a href="http://localhost:4000/posts">http://localhost:4000/posts</a></code></code>. You should be able to enter a new Post and see a list. Have a play, take some time and
-        remember to keep an eye on the Phoenix Service console (that's running in your terminal window) to see what's going on behind the scenes.
-        </p>
-        <p>Congrats on the work you've done so far! Next let's add some comments to our blog posts :) </p>
+        <p>Now we can restart our Phoenix Server (<code>mix phoenix.server</code>).</p>
+        <p>Open a browser window and enter the url
+          <code><code><a href="http://localhost:4000/posts">http://localhost:4000/posts</a></code></code>.</p>
+        <p>From here, you should be able to enter a new Post and see a list of all Posts.</p>
+        <p>Have a play, take some time and remember to keep an eye on the Phoenix Service console (that's running in your terminal window) to see what's going on behind the scenes.</p>
+        <p>Congratulations on the work you've done so far! Next, let's add the ability to add comments to our blog posts :) </p>
         <h2>Adding Comments</h2>
-        <p>Its time to be able to comment on each blog post. Ensure you are in the terminal window and the Phoenix server is <strong>not</strong> running. Remember
-        to stop the server press ctrl-c twice. Type the following command to generate a new comments model</p>
+        <p>First, ensure you are in the terminal window and the Phoenix server is <strong>not</strong> running. (Remember
+        to stop the server press ctrl-c twice.)</p>
+        <p>Enter the following command to generate a new comments model:</p>
         <p><code>mix phoenix.gen.model Comment comments name:string content:text post_id:references:posts</code></p>
-        <p>By using <code>references</code> above the Phoenix framework automatically creates the foreign key field for you and indexes it. Indexing helps to speed
-            up searching the database (you can think of it as being similar to a book index). A foreign key in this case is a column in the
-            comments table that uniquely identifies a post record in the Post table. </p>
-        <p>You should also notice the output of that command has generated new files for us to use. We now need to edit some of these files.
-        Lets start by adding the relationship between the Comments resource and the Posts resource to their corresponding models. In sublime navigate
-         to the following file web -> models -> comment.ex, open the file and add the following line.</p>
-        <p>The section of code should now resemble below</p>
+        <p>The <code>references</code> above, tells the Phoenix framework to create the foreign key field and index it. A foreign key is a column in the comments table that uniquely identifies a post record in the Post table. An index is similar to a book index and is used to make searching a database much quicker.</p>
+        <p>You should also note that the output of that command has generated several new files. We need to edit some of these files to customise their functionality to our requirements.</p>
+        <p>Let's start by adding the relationship between the Comments resource and the Posts resource to their corresponding models.</p>
+        <p>In Sublime, navigate
+         to the following file: web -> models -> comment.ex, open the file and add the following line:</p>
+        <p><code>belongs_to :post, BlogElixirGirls.Post, foreign_key: :post_id</code></p>
+        <p>The section of code should now look like:</p>
         <img src="/images/phoenix_belongs_to.png" alt="Phoenix models" width="80%" >
-        <p>We now need to create the other side of this relations inside our Post model. Naviate to and open the file web -> models ->
-        post.ex. Add <code>has_many :comments, BlogElixirGirls.Comment</code> after the line <code>field :body, :string</code>. Here we are telling our Post model that it can have many comments assocated to it. Don't forget to save the files. The
-        final code should resemble below</p>
+        <p>We now need to create the other side of this relationship inside our Post model.</p>
+        <p>Naviate to, and open, the file web -> models ->
+        post.ex.</p>
+        <p>Add <code>has_many :comments, BlogElixirGirls.Comment</code> after the line <code>field :body, :string</code>. Here we are telling our Post model that it can have many comments assocated with it. Don't forget to save the files. The final code should look like the following:</p>
         <img src="/images/phoenix_has_many.png" alt="Phoenix models" width="70%" >
-        <p>Ensure all files are saved. We are now ready to run the new migration which is very similar to what we did in Step 2 above</p>
-        <p>From the command line run the following</p>
+        <p>Ensure all files are saved. We are now ready to run the new migration which is similar to what we did in Step two above</p>
+        <p>From the command line run:</p>
         <p><code>mix ecto.migrate</code></p>
-        <p>Hopefully we should be on track with no issues (remember to call a mentor if you are stuck). Next we need to update our routes. Open the
-        router.ex file under the <b>web</b> folder and add the following to the scope "/".  Update the file so it resembles below. All we are doing here is add a route for comments underneath
-            the posts route. This will become clearly shortly </p>
+        <p>Next we need to update our routes.</p>
+        <p>Open the file router.ex under the <b>web</b> folder and update the file so it resembles the one below.</p>
 
         <pre><code>scope "/", BlogElixirGirls do
   pipe_through :browser # Use the default browser stack
@@ -252,22 +254,20 @@ end</code></pre>
   get "/", PageController, :index
 end</code></pre>
 
-        <p>Routes are a big topic in themselves but in a nutshell we have just made comment to be nested under posts. This really means we can't have
-        a comment without first having a post and also each comment belongs to (or is associated with) a post.</p>
-        <p>Lets go back to our terminal window and look at our routes. We can do this anytime in a project and it's a good habit to get into. </p>
+        <p>All we are doing here is adding a route for comments to be nested underneath the posts route. This means we can't have a comment without first having a post, and also each comment belongs to (or is associated with) a post.</p>
+        <p>Let's go back to our terminal window and look at our routes. We can do this anytime in a project and it's a good habit to get into.</p>
         <p><code>mix phoenix.routes</code></p>
         <img src="/images/phoenix_routes.png" alt="Phoenix routes" width="70%" >
-        <p>The route that has the red arrow is the one we are currently interested in. It tells us exactly what the url needs to be in order to create
-        a comment. Don't be confused. We have a lightning talk about routes coming up. Just go with it for now :) </p>
-        <p>Before we move on it's a good time to create an alias for the Comment model. Elixir allows us to set up an alias for any module name.
-        In our project the module name is <code>BlogElixirGirls</code> and therefore the fully-qualified name for our Comment model is
-            BlogElixirGirls.Comment but we can shorten this name to just Comment by using an alias...so let's do that now</p>
-        <p>Navigate and open the post_controller.ex file inside the web -> controllers folder and add this line at the top, right underneath the
-        existing alias (alias BlogElixirGirls.Post)</p>
+        <p>The route that has the red arrow is the one we are interested in. It tells us exactly what the url needs to be in order to create
+        a comment.</p>
+        <p>Don't be confused! We have a lightning talk about routes coming up. Just go with it for now :) </p>
+        <p>Before we move on, it's a good time to create an alias for the Comment model. Elixir allows us to set up aliases for module name.</p>
+        <p>In our project, the module name is <code>BlogElixirGirls</code>. Therefore the fully-qualified name for our Comment model is BlogElixirGirls.Comment. We can shorten this name to just Comment by using an alias, which makes it much easier to refer to. Let's do that now.</p>
+        <p>Navigate and open the file post_controller.ex inside the web -> controllers folder and add the following line at the top, right underneath the existing alias (alias BlogElixirGirls.Post)</p>
 
         <p><code>alias BlogElixirGirls.Comment, as: Comment</code></p>
-        <p>Now its time to add a function scrub_params. Basically this 'scrubs' the params from the request and
-            is useful for removing empty strings sent via HTML forms. Let's do that  now. Add the following line below the alias</p>
+        <p>Now it's time to add a function scrub_params. Basically, this 'scrubs' the params from the request and
+            is useful for removing empty strings sent via HTML forms. To do this, add the following line below the alias:</p>
         <p><code>plug :scrub_params, "comment" when action in [:add_comment]</code></p>
         <p>The next step is to define the <strong>add_comment</strong> function</p>
         <pre><code>def add_comment(conn, %{"comment" => comment_params, "post_id" => post_id}) do
@@ -285,19 +285,18 @@ end</code></pre>
   end
 end
         </code></pre>
-      <p>The <code>Comment.changeset</code> function is defined in the model (web -> models -> comment.ex) and its purpose is to ensure
-      the data is in the correct format and valid before being saved to our comment table in the database</p>
-        <p>We next need to update show function inside the post_controller.ex file. Navigate to it (remember its under web -> controllers).
-            Change the show function be reflect the changes below
+      <p>The <code>Comment.changeset</code> function is defined in the model (web -> models -> comment.ex) and its purpose is to ensure that the data is in the correct format and is valid before being saved to the comment table in the database</p>
+        <p>We next need to update the show function inside the post_controller.ex file.</p>
+        <p>Navigate to it (remember it's under web -> controllers) and change the show function be reflect the changes below
         </p>
 <pre><code>def show(conn, %{"id" => id}) do
   post = Repo.get(Post, id) |> Repo.preload([:comments])
   changeset = Comment.changeset(%Comment{})
   render(conn, "show.html", post: post, changeset: changeset)
 end</code></pre>
-        <p>Here we are getting the post and all of its associated comments. The comment changeset is necessary to enable us to have the comments
-        form on the post view. So now we need to create the comment form. Create a new file called <code>comment_form.html.eex</code> in the
-        web -> templates -> post folder and input the following</p>
+        <p>Here we are getting the post and all of its associated comments. The comment changeset enables us to have the comments form on the post view.</p>
+        <p>Now we need to create the comment form. Create a new file called <code>comment_form.html.eex</code> in the
+        web -> templates -> post folder and add the following:</p>
 
         <xmp><%= form_for @changeset, @action, fn f -> %>
    <%= if f.errors != [] do %>
@@ -325,15 +324,16 @@ end</code></pre>
      <%= submit "Add comment", class: "btn btn-primary" %>
    </div>
 <% end %></xmp>
-        <p>In order to render the above template in the post show view we must update it. Navigate to web -> templates -> post -> show.html.eex and
-        input the following line just above the link lines of code</p>
+
+        <p>In order to render this template in the post show view, we will need to make some changes.</p>
+        <p>Navigate to web -> templates -> post -> show.html.eex and enter the following line just above the link lines of code</p>
         <pre><code><%= render "comment_form.html", post: @post, changeset: @changeset, action: post_post_path(@conn, :add_comment, @post) %>
 </code></pre>
 
         <h2>Step 4...almost there</h2>
-        <p>We want to be able to see the comments for each post but right now we cannot. Lets fix that. Create a partial in web -> templates ->
-        post folder and call it <code>comments.html.eex</code></p>
-        <p>Ensure the file looks similar to below and don't forget to save it</p>
+        <p>Currently, we are unable to see the comments for each post. Let's fix that!</p>
+        <p>Create a file in web -> templates -> post folder and call it <code>comments.html.eex</code></p>
+        <p>Add the code below and remember to save the file.</p>
         <xmp><h3> Comments: </h3>
 <table class="table">
   <thead>
@@ -351,13 +351,14 @@ end</code></pre>
 <% end %>
   </tbody>
 </table></xmp>
-<p>Finally we need to render this template in the web -> templates -> post folder inside the <code>show.html.eex</code> file. Paste the line just
-        below the previoulsy added line</p>
+    <p>Finally, we need to render this template in the web -> templates -> post folder inside the <code>show.html.eex</code> file.</p>
+    <p>Paste the following code just below the line you previoulsy added:</p>
         <p><code><%= render "comments.html", post: @post %></code></p>
-        <p>Lets fire up our Phoenix server and test our app, we should be able to enter comments for each post. Have a play and remember the console output is a great place to start if you have having any issues.</p>
-        <p>In the terminal type <code>mix phoenix.server</code> to start the server. Then open your browser window and visit <code><a href="http://localhost:4000/posts">http://localhost:4000/posts</a></code></p>
-        <p>You might notice a slight issue, when we save our comment it seems to disappear, this is because when we are passing in our params we are not
-        passing in the post_id. Lets fix this now. Navigate to the web -> models and open the <code>comment.ex</code> file. Update the <code>changeset</code> function to reflect the code below </p>
+        <p>Let's fire up our Phoenix server and test our app! We should now be able to enter comments for each post.</p>
+        <p>Have a play and remember the console output is a great place to start if you have having any issues.</p>
+        <p>In the terminal, type <code>mix phoenix.server</code> to start the server. Then open your browser window and go to <code><a href="http://localhost:4000/posts">http://localhost:4000/posts</a></code></p>
+        <p>You might notice a slight issue: when we save our comment, it seems to disappear. This is because when we are passing in our params we are not passing in the post_id. Lets fix this now.</p>
+        <p>Navigate to the web -> models and open the <code>comment.ex</code> file. Update the <code>changeset</code> function to reflect the code below:</p>
 <pre><code>def changeset(struct, params \\ %{}) do
 
     struct
@@ -366,9 +367,7 @@ end</code></pre>
 end</code></pre>
         <p>Don't forget to save the file. Restart the Phoenix server <code>mix phoenix.server</code> and open the browser url to <code><a href="http://localhost:4000/posts">http://localhost:4000/posts</a></code>. Enter
         some posts and comments and you should be able to now see all comments associated with a post as expected</p>
-        <p>Huge congrats!!! You have just built your first Elixir App</p>
-
-
+        <p>Huge congrats!!! You have just built your first Elixir App!</p>
 
     </div>
     <!-- /#page-wrapper -->
